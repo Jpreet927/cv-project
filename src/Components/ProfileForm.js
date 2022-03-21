@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import '../Styles/ProfileForm.css'
 
 export class ProfileForm extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const { fullName, tagling, phone, email, linkedin, github } = this.props;
+
     return (
       <div className='profile-form'>
         <h3>Personal Information</h3>
