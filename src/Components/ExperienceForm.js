@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import '../Styles/ExperienceForm.css'
+import x from "../Images/x.png"
 
 export class ExperienceForm extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const { handleDelete, id } = this.props;
+
     return (
       <div className='experience-form'>
+        <img src={x} alt="" onClick={() => handleDelete(id)}/>
         <form action="" id='experience__form'>
           <div className="experience__input experience__name">
             <label htmlFor="">Company Name</label>

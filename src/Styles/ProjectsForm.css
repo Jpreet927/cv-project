@@ -17,6 +17,20 @@
   margin-bottom: 24px;
 }
 
+.projects-form img {
+  width: 12px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  filter: brightness(0);
+  opacity: 0.2;
+}
+
+.projects-form img:hover {
+  opacity: 0.4;
+  cursor: pointer;
+}
+
 #projects__form {
   display: flex;
   flex-direction: column;

@@ -28,7 +28,7 @@ export class App extends Component {
         awards: "",
         gpa: ""
       },
-      employmentCount: 0,
+      employmentCount: 1,
       employment: [{
         id: 0,
         company: "",
@@ -38,7 +38,7 @@ export class App extends Component {
         startDate: "",
         endDate: ""
       }],
-      projectCount: 0,
+      projectCount: 1,
       projects: [{
         id: 0,
         title: "",
@@ -50,19 +50,47 @@ export class App extends Component {
   }
 
   addEmployment = () => {
-    this.setState((prev) => ({
-      ...prev,
-      employment: [...prev.employment, {
-        id: 0,
+    this.setState({
+      employmentCount: this.state.employment.length,
+      employment: [...this.state.employment, {
+        id: this.state.employment.length,
         company: "",
         city: "",
         position: "",
         tasks: "",
         startDate: "",
         endDate: ""
-      },
-    ],
-    }))
+      }],
+    })
+    console.log(this.state.employment);
+    console.log(this.state.employmentCount);
+  }
+
+  addProject = () => {
+    this.setState({
+      projectCount: this.state.projects.length,
+      projects: [...this.state.projects, {
+        id: this.state.projects.length,
+        title: "",
+        tech: "",
+        startDate: "",
+        endDate: ""
+      }]
+    })
+    console.log(this.state.projects);
+    console.log(this.state.projectCount);
+  }
+
+  deleteEmployment = (id) => {
+    this.setState ({
+      employment: this.state.employment.filter((element) => element.id !== id)
+    });
+  }
+  
+  deleteProject = (id) => {
+    this.setState ({
+      projects: this.state.projects.filter((element) => element.id !== id)
+    });
   }
 
   render() {
@@ -100,10 +128,11 @@ export class App extends Component {
                   tasks={element.tasks}
                   startDate={element.startDate}
                   endDate={element.endDate}
+                  handleDelete={this.deleteEmployment}
                 />
               )
             })}
-            <AddButton />
+            <AddButton onClick={this.addEmployment} />
           </div>
           <div>
             <h3>Personal Projects</h3>
@@ -116,10 +145,11 @@ export class App extends Component {
                   tech={element.tech}
                   startDate={element.startDate}
                   endDate={element.endDate}
+                  handleDelete={this.deleteProject}
                 />
               )
             })}
-            <AddButton />
+            <AddButton onClick={this.addProject}/>
           </div>
         </div>
         <Footer />

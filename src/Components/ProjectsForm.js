@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import '../Styles/ProjectsForm.css'
+import x from "../Images/x.png"
 
 export class ProjectsForm extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const { handleDelete, id } = this.props;
     return (
       <div className='projects-form'>
+        <img src={x} alt="" onClick={() => handleDelete(id)}/>
         <form action="" id='projects__form'>
           <div className="projects__input projects__name">
             <label htmlFor="">Project Title</label>
