@@ -7,6 +7,7 @@ import ExperienceForm from './Components/ExperienceForm'
 import ProjectsForm from './Components/ProjectsForm'
 import Footer from './Components/Footer'
 import AddButton from './Components/AddButton'
+import CVPreview from './Components/CVPreview'
 
 export class App extends Component {
   constructor(props) {
@@ -153,7 +154,8 @@ export class App extends Component {
     return (
       <div className="app__main">
         <Header />
-        <ProfileForm 
+        <CVPreview />
+        {/* <ProfileForm 
           fullName={profile.fullName}
           tagline={profile.tagline}
           phone={profile.phone}
@@ -211,7 +213,7 @@ export class App extends Component {
             })}
             <AddButton onClick={this.addProject}/>
           </div>
-        </div>
+        </div> */}
         <Footer />
       </div>
     )
