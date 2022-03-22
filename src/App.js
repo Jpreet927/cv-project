@@ -43,10 +43,63 @@ export class App extends Component {
         id: 0,
         title: "",
         tech: "",
+        description: "",
         startDate: "",
         endDate: ""
       }]
     }
+  }
+
+  handleChangeProfile = (e) => {
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
+
+    this.setState({
+      profile: {
+        inputName: inputValue
+      }
+    });
+
+    console.log(`${e.target.name}: ${e.target.value}`);
+  }
+
+  handleChangeEducation = (e) => {
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
+
+    this.setState({
+      education: {
+        inputName: inputValue
+      }
+    });
+
+    console.log(`${e.target.name}: ${e.target.value}`);
+  }
+
+  handleChangeEmployment = (e, index) => {
+    const employmentArray = this.state.employment;
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
+
+    employmentArray[index][inputName] = inputValue;
+    this.setState({
+      employment: employmentArray
+    });
+
+    console.log(`${e.target.name}: ${e.target.value}`);
+  }
+
+  handleChangeProject = (e, index) => {
+    const projectArray = this.state.projects;
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
+
+    projectArray[index][inputName] = inputValue;
+    this.setState({
+      projects: projectArray
+    });
+
+    console.log(`${e.target.name}: ${e.target.value}`);
   }
 
   addEmployment = () => {
@@ -73,6 +126,7 @@ export class App extends Component {
         id: this.state.projects.length,
         title: "",
         tech: "",
+        description: "",
         startDate: "",
         endDate: ""
       }]
@@ -105,6 +159,7 @@ export class App extends Component {
           email={profile.email}
           linkedin={profile.linkedin}
           github={profile.github}
+          handleChange={this.handleChangeProfile}
         />
         <EducationForm 
           institution={education.institution}
@@ -113,11 +168,12 @@ export class App extends Component {
           endDate={education.endDate}
           awards={education.awards}
           gpa={education.gpa}
+          handleChange={this.handleChangeEducation}
         />
         <div className="experience-project-form-section">
           <div>
             <h3>Work Experience</h3>
-            {employment.map((element) => {
+            {employment.map((element, index) => {
               return (
                 <ExperienceForm 
                   key={element.id}
@@ -129,6 +185,7 @@ export class App extends Component {
                   startDate={element.startDate}
                   endDate={element.endDate}
                   handleDelete={this.deleteEmployment}
+                  handleChange={(e) => this.handleChangeEmployment(e, index)}
                 />
               )
             })}
@@ -136,16 +193,18 @@ export class App extends Component {
           </div>
           <div>
             <h3>Personal Projects</h3>
-            {projects.map((element) => {
+            {projects.map((element, index) => {
               return (
                 <ProjectsForm 
                   key={element.id}
                   id={element.id}
                   title={element.title}
                   tech={element.tech}
+                  description={element.description}
                   startDate={element.startDate}
                   endDate={element.endDate}
                   handleDelete={this.deleteProject}
+                  handleChange={(e) => this.handleChangeProject(e, index)}
                 />
               )
             })}

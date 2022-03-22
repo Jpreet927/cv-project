@@ -8,7 +8,7 @@ export class ExperienceForm extends Component {
   }
 
   render() {
-    const { handleDelete, id } = this.props;
+    const { handleDelete, handleChange, id } = this.props;
 
     return (
       <div className='experience-form'>
@@ -16,27 +16,27 @@ export class ExperienceForm extends Component {
         <form action="" id='experience__form'>
           <div className="experience__input experience__name">
             <label htmlFor="">Company Name</label>
-            <input type="text" />
+            <input type="text" name='company' onChange={handleChange}/>
           </div>
           <div className="experience__input experience__city">
             <label htmlFor="">City</label>
-            <input type="text" />  
+            <input type="text" name='city' onChange={handleChange}/>  
           </div>
           <div className="experience__input experience__position">
             <label htmlFor="">Your Position</label>
-            <input type="text" />
+            <input type="text" name='position' onChange={handleChange}/>
           </div>
           <div className="experience__input experience__tasks">
             <label htmlFor="">Your Tasks & Accomplishments</label>
-            <input type="text" />
+            <input type="text" name='tasks' onChange={handleChange}/>
           </div>
           <div className="experience__input experience__start-date">
             <label htmlFor="">Start Date</label>
-            <input type="text" />
+            <input type="text" name='startDate' onChange={handleChange}/>
           </div>
           <div className="experience__input experience__end-date">
             <label htmlFor="">End Date</label>
-            <input type="text" />
+            <input type="text" name='endDate' onChange={handleChange}/>
           </div>
         </form>
       </div>
