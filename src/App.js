@@ -13,13 +13,14 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      editMode: true,
       profile: {
         fullName: "",
         tagline: "",
         phone: "",
         email: "",
         linkedin: "",
-        github: "",
+        portfolio: "",
         skills: ""
       },
       education: {
@@ -52,30 +53,38 @@ export class App extends Component {
     }
   }
 
+  togglePageMode = () => {
+    this.setState(prevState => ({
+      editMode: !prevState.editMode
+    }))
+  }
+
   handleChangeProfile = (e) => {
     const inputName = e.target.name;
     const inputValue = e.target.value;
+    const profileInfo = this.state.profile;
+
+    profileInfo[inputName] = inputValue;
 
     this.setState({
-      profile: {
-        inputName: inputValue
-      }
+      profile: profileInfo
     });
 
-    console.log(`${e.target.name}: ${e.target.value}`);
+    console.log(this.state.profile);
   }
 
   handleChangeEducation = (e) => {
     const inputName = e.target.name;
     const inputValue = e.target.value;
+    const educationInfo = this.state.education;
+
+    educationInfo[inputName] = inputValue
 
     this.setState({
-      education: {
-        inputName: inputValue
-      }
+      education: educationInfo
     });
 
-    console.log(`${e.target.name}: ${e.target.value}`);
+    console.log(this.state.education);
   }
 
   handleChangeEmployment = (e, index) => {
@@ -88,7 +97,7 @@ export class App extends Component {
       employment: employmentArray
     });
 
-    console.log(`${e.target.name}: ${e.target.value}`);
+    console.log(this.state.employment);
   }
 
   handleChangeProject = (e, index) => {
@@ -150,70 +159,79 @@ export class App extends Component {
   }
 
   render() {
-    const { profile, education, employmentCount, employment, projectCount, projects } = this.state;
+    const { editMode, profile, education, employmentCount, employment, projectCount, projects } = this.state;
     return (
       <div className="app__main">
-        <Header />
-        <CVPreview />
-        {/* <ProfileForm 
-          fullName={profile.fullName}
-          tagline={profile.tagline}
-          phone={profile.phone}
-          email={profile.email}
-          linkedin={profile.linkedin}
-          github={profile.github}
-          handleChange={this.handleChangeProfile}
-        />
-        <EducationForm 
-          institution={education.institution}
-          major={education.major}
-          startDate={education.startDate}
-          endDate={education.endDate}
-          awards={education.awards}
-          gpa={education.gpa}
-          handleChange={this.handleChangeEducation}
-        />
-        <div className="experience-project-form-section">
-          <div>
-            <h3>Work Experience</h3>
-            {employment.map((element, index) => {
-              return (
-                <ExperienceForm 
-                  key={element.id}
-                  id={element.id}
-                  company={element.company}
-                  city={element.city}
-                  position={element.position}
-                  tasks={element.tasks}
-                  startDate={element.startDate}
-                  endDate={element.endDate}
-                  handleDelete={this.deleteEmployment}
-                  handleChange={(e) => this.handleChangeEmployment(e, index)}
-                />
-              )
-            })}
-            <AddButton onClick={this.addEmployment} />
-          </div>
-          <div>
-            <h3>Personal Projects</h3>
-            {projects.map((element, index) => {
-              return (
-                <ProjectsForm 
-                  key={element.id}
-                  id={element.id}
-                  title={element.title}
-                  tech={element.tech}
-                  description={element.description}
-                  startDate={element.startDate}
-                  endDate={element.endDate}
-                  handleDelete={this.deleteProject}
-                  handleChange={(e) => this.handleChangeProject(e, index)}
-                />
-              )
-            })}
-            <AddButton onClick={this.addProject}/>
-          </div>
-        </div> */}
+        <Header mode={editMode} toggleMode={this.togglePageMode} />
+        { editMode ? 
+          <>
+            <ProfileForm 
+              fullName={profile.fullName}
+              tagline={profile.tagline}
+              phone={profile.phone}
+              email={profile.email}
+              linkedin={profile.linkedin}
+              portfolio={profile.portfolio}
+              skills={profile.skills}
+              handleChange={this.handleChangeProfile}
+            />
+            <EducationForm 
+              institution={education.institution}
+              major={education.major}
+              startDate={education.startDate}
+              endDate={education.endDate}
+              awards={education.awards}
+              gpa={education.gpa}
+              handleChange={this.handleChangeEducation}
+            />
+            <div className="experience-project-form-section">
+              <div>
+                <h3>Work Experience</h3>
+                {employment.map((element, index) => {
+                  return (
+                    <ExperienceForm 
+                      key={element.id}
+                      id={element.id}
+                      company={element.company}
+                      city={element.city}
+                      position={element.position}
+                      tasks={element.tasks}
+                      startDate={element.startDate}
+                      endDate={element.endDate}
+                      handleDelete={this.deleteEmployment}
+                      handleChange={(e) => this.handleChangeEmployment(e, index)}
+                    />
+                  )
+                })}
+                <AddButton onClick={this.addEmployment} />
+              </div>
+              <div>
+                <h3>Personal Projects</h3>
+                {projects.map((element, index) => {
+                  return (
+                    <ProjectsForm 
+                      key={element.id}
+                      id={element.id}
+                      title={element.title}
+                      tech={element.tech}
+                      description={element.description}
+                      startDate={element.startDate}
+                      endDate={element.endDate}
+                      handleDelete={this.deleteProject}
+                      handleChange={(e) => this.handleChangeProject(e, index)}
+                    />
+                  )
+                })}
+                <AddButton onClick={this.addProject}/>
+              </div>
+            </div> 
+          </> : 
+          <CVPreview 
+            profile={profile}
+            education={education}
+            employment={employment}
+            projects={projects}
+          /> }
         <Footer />
       </div>
     )

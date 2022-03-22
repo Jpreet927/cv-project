@@ -2,15 +2,20 @@ import React, { Component } from 'react'
 import '../Styles/CVProject.css'
 
 export class CVProject extends Component {
+  constructor(props) {
+      super(props);
+  }
+
   render() {
+    const { title, tech, description, startDate, endDate } = this.props;
     return (
       <div className="cv-project__main">
           <div className="cv-project__header">
-              <h5 id="cv-project__project-title">Project 1</h5>
-              <p id="cv-project__start-end-date">Start Date - End Date</p>
+              <h5 id="cv-project__project-title">{title}</h5>
+              <p id="cv-project__start-end-date">{`${startDate} - ${endDate}`}</p>
           </div>
-          <p id="cv-project__tech">React js, Node js, Express js</p>
-          <p id="cv-project__project-description">Elit amet aliquip excepteur aliquip nulla eiusmod reprehenderit aute ut ea sit cupidatat elit fugiat. Est ipsum occaecat cupidatat tempor labore quis cillum ullamco. Et ullamco eu duis ut esse mollit esse eiusmod magna consequat officia eu non commodo.</p>
+          <p id="cv-project__tech">{`Technologies Used: ${tech}`}</p>
+          <p id="cv-project__project-description">{description}</p>
       </div>
     )
   }
