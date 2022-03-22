@@ -21,14 +21,6 @@ export class EducationForm extends Component {
             <label htmlFor="">Your Major</label>
             <input type="text" name='major' onChange={handleChange}/>  
           </div>
-          <div className="education__input education__phone">
-            <label htmlFor="">Start Date</label>
-            <input type="text" name='startDate' onChange={handleChange}/>
-          </div>
-          <div className="education__input education__email">
-            <label htmlFor="">End Date</label>
-            <input type="text" name='endDate' onChange={handleChange}/>
-          </div>
           <div className="education__input education__linkedin">
             <label htmlFor="">Awards and Distinctions</label>
             <input type="text" name='awards' onChange={handleChange}/>
@@ -36,6 +28,14 @@ export class EducationForm extends Component {
           <div className="education__input education__github">
             <label htmlFor="">Cumulative GPA</label>
             <input type="text" name='gpa' onChange={handleChange}/>
+          </div>
+          <div className="education__input education__phone">
+            <label htmlFor="">Start Date</label>
+            <input type="text" name='startDate' onChange={handleChange}/>
+          </div>
+          <div className="education__input education__email">
+            <label htmlFor="">End Date</label>
+            <input type="text" name='endDate' onChange={handleChange}/>
           </div>
         </form>
       </div>

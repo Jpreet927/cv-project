@@ -18,7 +18,8 @@ export class App extends Component {
         phone: "",
         email: "",
         linkedin: "",
-        github: ""
+        github: "",
+        skills: ""
       },
       education: {
         institution: "",

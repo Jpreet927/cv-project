@@ -37,6 +37,10 @@ export class ProfileForm extends Component {
             <label htmlFor="">Github Profile</label>
             <input type="text" name='github' onChange={handleChange}/>
           </div>
+          <div className="profile__input profile__skills">
+            <label htmlFor="">Your Skills</label>
+            <input type="text" name='skills' onChange={handleChange} />
+          </div>
         </form>
       </div>
     )
